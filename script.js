@@ -1,7 +1,7 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-const rulesPanel = document.getElementById("rulesPanel");
 
+const rulesPanel = document.getElementById("rulesPanel");
 const surviveRulesContainer = document.getElementById("surviveRules");
 const birthRulesContainer = document.getElementById("birthRules");
 const addSurviveRuleButton = document.getElementById("addSurviveRule");
@@ -84,7 +84,6 @@ function updateRulesPanelContent() {
     headerBirth.textContent = "Birth Rules:";
     rulesPanel.appendChild(headerBirth);
 
-    // Display "B" rules
     for (let i = 0; i < bRules.length; i++) {
         const ruleDiv = document.createElement("div");
         ruleDiv.textContent = `B${i}: ${bRules[i]}`;
@@ -171,6 +170,10 @@ function drawGrid() {
     for (let x = 0; x < gridWidth; x++) {
         for (let y = 0; y < gridHeight; y++) {
             if (grid[x][y]) {
+                ctx.fillStyle = "white";
+                ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+            }
+            else {
                 ctx.fillStyle = "black";
                 ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
             }
@@ -263,18 +266,80 @@ function randomizeGrid() {
     drawGrid();
 }
 
-canvas.addEventListener("click", (event) => {
+canvas.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+});
+
+canvas.addEventListener("mousemove", (event) => {
+    if (isMouseDown) {
+        handleMouseDrag(event);
+    }
+});
+
+canvas.addEventListener("mousedown", (event) => {
+    isMouseDown = true;
+    handleMouseDrag(event);
+});
+
+canvas.addEventListener("mouseup", () => {
+    isMouseDown = false;
+    previousMousePos = null;
+});
+
+let previousMousePos = null;
+
+function handleMouseDrag(event) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
     const x = Math.floor(mouseX / cellSize);
     const y = Math.floor(mouseY / cellSize);
 
-    grid[x][y] = !grid[x][y];
+    if (previousMousePos) {
+        drawLine(previousMousePos.x, previousMousePos.y, x, y);
+    }
+
+    if (event.buttons === 1) {
+        grid[x][y] = true;
+    } else if (event.buttons === 2) {
+        grid[x][y] = false;
+    }
+
     drawGrid();
-});
+    previousMousePos = { x, y };
+}
 
+function drawLine(x1, y1, x2, y2) {
+    const dx = Math.abs(x2 - x1);
+    const dy = Math.abs(y2 - y1);
+    const sx = (x1 < x2) ? 1 : -1;
+    const sy = (y1 < y2) ? 1 : -1;
+    let err = dx - dy;
 
+    while (true) {
+        if (x1 === x2 && y1 === y2) {
+            break;
+        }
+
+        const e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            x1 += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            y1 += sy;
+        }
+
+        if (previousMousePos) {
+            if (event.buttons === 1) {
+                grid[x1][y1] = true;
+            } else if (event.buttons === 2) {
+                grid[x1][y1] = false;
+            }
+        }
+    }
+}
 
 document.getElementById("startButton").addEventListener("click", startGame);
 document.getElementById("pauseButton").addEventListener("click", stopGame);
