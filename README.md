@@ -1,5 +1,8 @@
 # [Click Here to Play!](https://adamullmann.github.io/Cellular-Automata-Online/)
 
+Also check out my desktop version written in C++ (it's faster and better): https://github.com/AdamUllmann/Game-of-Life-plus-plus
+  
+
 An interactive Cellular Automata simulation built using Javascript, CSS, and HTML. Allows the user to experiment with rule combinations in real-time.
 
 ## Features
