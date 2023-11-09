@@ -232,6 +232,10 @@ function updateBirthRules() {
     bRules.push(...birthRulesInput.value.split(",").map(rule => parseInt(rule.trim(), 10)));
 }
 
+rulesPanel.style.display = "block";
+surviveRulesInput.value = sRules.join(", ");
+birthRulesInput.value = bRules.join(", ");
+
 const speedSlider = document.getElementById("speedSlider");
 const speedValueDisplay = document.getElementById("speedValue");
 
@@ -259,7 +263,7 @@ function updateSpeed() {
 
 speedSlider.addEventListener("input", () => {
     speedValueDisplay.textContent = speedSlider.value;
-    updateSpeed(); // Call the function when the slider is changed
+    updateSpeed();
 });
 
 document.getElementById("startButton").addEventListener("click", startGame);

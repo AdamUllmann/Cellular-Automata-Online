@@ -2,7 +2,8 @@ body, html {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: black;
+    background: #1a1a1a;
+    font-family: 'Arial', sans-serif;
 }
 
 #container {
@@ -16,7 +17,7 @@ body, html {
 
 #gameCanvas {
     flex: 1;
-    border: 1px solid black;
+    border: 1px solid #333;
 }
 
 #buttons {
@@ -30,27 +31,78 @@ body, html {
 }
 
 button {
-    margin: 5px;
+    margin: 8px; 
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white; 
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049; 
 }
 
 #rulesPanel {
     display: none;
     position: absolute;
-    top: 10px;
-    left: 10px;
-    border: 1px solid black;
-    padding: 10px;
-    background: white;
+    top: 20px;
+    left: 20px;
+    border: 1px solid #4CAF50;
+    padding: 12px;
+    background: #333; 
+    box-shadow: 0 0 16px rgba(76, 175, 80, 0.3); 
+    color: #fff; 
 }
 
 #rulesPanel h2 {
-    font-size: 16px;
+    font-size: 18px;
+    color: #4CAF50;
+    border-bottom: 1px solid #4CAF50; 
+    padding-bottom: 6px; 
+}
+
+#surviveRules,
+#birthRules {
+    margin-top: 10px; 
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 6px; 
+    margin-top: 1px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    border: 1px solid #4CAF50;
+    outline: none;
+}
+
+#surviveRulesInput,
+#birthRulesInput {
+    background: #444;
+    color: #fff;
+    border: 1px solid #4CAF50;
+}
+
+#surviveRulesInput::placeholder,
+#birthRulesInput::placeholder {
+    color: #aaa;
+}
+
+#surviveRulesInput:focus,
+#birthRulesInput:focus {
+    border: 1px solid #4CAF50; 
+    outline: none;
 }
 
 #speedValue {
-    color: white;
+    color: #4CAF50; 
+    font-weight: bolder;
 }
 
 label[for="speedSlider"] {
-    color: white; 
+    color: #4CAF50;
+    font-weight: bolder;
 }
