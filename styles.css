@@ -2,6 +2,7 @@ body, html {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background: black;
 }
 
 #container {
@@ -39,15 +40,6 @@ button {
     left: 10px;
     border: 1px solid black;
     padding: 10px;
-}
-
-#rulesPanel {
-    display: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    border: 1px solid black;
-    padding: 10px;
     background: white;
 }
 
@@ -55,6 +47,10 @@ button {
     font-size: 16px;
 }
 
-#rulesPanel p {
-    font-size: 14px;
+#speedValue {
+    color: white;
+}
+
+label[for="speedSlider"] {
+    color: white; 
 }

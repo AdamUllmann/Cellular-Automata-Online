@@ -232,6 +232,36 @@ function updateBirthRules() {
     bRules.push(...birthRulesInput.value.split(",").map(rule => parseInt(rule.trim(), 10)));
 }
 
+const speedSlider = document.getElementById("speedSlider");
+const speedValueDisplay = document.getElementById("speedValue");
+
+function startGame() {
+    const speed = parseInt(speedSlider.max, 10) - parseInt(speedSlider.value, 10);
+    if (!isGameRunning) {
+        intervalId = setInterval(() => {
+            updateGrid();
+            drawGrid();
+        }, speed);
+        isGameRunning = true;
+    }
+}
+
+function updateSpeed() {
+    const speed = parseInt(speedSlider.max, 10) - parseInt(speedSlider.value, 10);
+    if (isGameRunning) {
+        clearInterval(intervalId);
+        intervalId = setInterval(() => {
+            updateGrid();
+            drawGrid();
+        }, speed);
+    }
+}
+
+speedSlider.addEventListener("input", () => {
+    speedValueDisplay.textContent = speedSlider.value;
+    updateSpeed(); // Call the function when the slider is changed
+});
+
 document.getElementById("startButton").addEventListener("click", startGame);
 document.getElementById("pauseButton").addEventListener("click", stopGame);
 document.getElementById("clearButton").addEventListener("click", clearGrid);

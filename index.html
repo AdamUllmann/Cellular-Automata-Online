@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body style="background-color: black;">
+<body>
     <div id="container">
         <canvas id="gameCanvas"></canvas>
     </div>
@@ -13,6 +13,9 @@
         <button id="randomizeButton">Randomize</button>
         <button id="pauseButton">Pause</button>
         <button id="rulesButton">Rules</button>
+        <label for="speedSlider">Speed:</label>
+        <input type="range" id="speedSlider" min="1" max="100" value="50">
+        <span id="speedValue">50</span>
     </div>
     <div id="rulesPanel" style="display: none;">
         <h2>Rules</h2>
