@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
+<body style="background-color: black;">
     <div id="container">
         <canvas id="gameCanvas"></canvas>
     </div>
@@ -14,15 +14,15 @@
         <button id="pauseButton">Pause</button>
         <button id="rulesButton">Rules</button>
     </div>
-    <div id="rulesPanel">
+    <div id="rulesPanel" style="display: none;">
         <h2>Rules</h2>
         <div id="surviveRules">
             <h3>Survive Rules:</h3>
-            <!-- Display and manage S rules here -->
+            <input type="text" id="surviveRulesInput">
         </div>
         <div id="birthRules">
             <h3>Birth Rules:</h3>
-            <!-- Display and manage B rules here -->
+            <input type="text" id="birthRulesInput">
         </div>
     </div>
 

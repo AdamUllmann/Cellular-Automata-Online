@@ -1,146 +1,8 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-const rulesPanel = document.getElementById("rulesPanel");
-const surviveRulesContainer = document.getElementById("surviveRules");
-const birthRulesContainer = document.getElementById("birthRules");
-const addSurviveRuleButton = document.getElementById("addSurviveRule");
-const addBirthRuleButton = document.getElementById("addBirthRule");
-
-const sRules = [2, 3, 4]; 
-const bRules = [3, 0];
-let isEditingSurviveRules = false;
-let isEditingBirthRules = false;
-
-function addSurviveRule() {
-    sRules.push(0); 
-    updateRulesPanelContent(); 
-}
-
-function addBirthRule() {
-    bRules.push(0); 
-    updateRulesPanelContent(); 
-}
-
-function removeSurviveRule(index) {
-    sRules.splice(index, 1);
-    updateRulesPanelContent();
-}
-
-function removeBirthRule(index) {
-    bRules.splice(index, 1);
-    updateRulesPanelContent(); 
-}
-
-function updateRulesPanelContent() {
-    const rulesPanel = document.getElementById("rulesPanel");
-    rulesPanel.innerHTML = "";
-
-    const headerSurvive = document.createElement("h2");
-    headerSurvive.textContent = "Survive Rules:";
-    rulesPanel.appendChild(headerSurvive);
-
-    for (let i = 0; i < sRules.length; i++) {
-        const ruleDiv = document.createElement("div");
-        ruleDiv.textContent = `S${i}: ${sRules[i]}`;
-
-        if (isEditingSurviveRules) {
-            const increaseButton = document.createElement("button");
-            increaseButton.textContent = "+";
-            increaseButton.addEventListener("click", () => {
-                sRules[i] = (sRules[i] + 1) % 9;
-                updateRulesPanelContent();
-            });
-
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "-";
-            deleteButton.addEventListener("click", () => {
-                sRules.splice(i, 1);
-                updateRulesPanelContent();
-            });
-
-            ruleDiv.appendChild(increaseButton);
-            ruleDiv.appendChild(deleteButton);
-        }
-
-        rulesPanel.appendChild(ruleDiv);
-    }
-
-    if (isEditingSurviveRules) {
-        const addRuleButton = document.createElement("button");
-        addRuleButton.textContent = "+ Add Rule";
-        addRuleButton.addEventListener("click", addSurviveRule);
-        rulesPanel.appendChild(addRuleButton);
-    }
-
-    if (isEditingBirthRules) {
-        const addRuleButton = document.createElement("button");
-        addRuleButton.textContent = "+ Add Rule";
-        addRuleButton.addEventListener("click", addBirthRule);
-        rulesPanel.appendChild(addRuleButton);
-    }
-
-    const headerBirth = document.createElement("h2");
-    headerBirth.textContent = "Birth Rules:";
-    rulesPanel.appendChild(headerBirth);
-
-    for (let i = 0; i < bRules.length; i++) {
-        const ruleDiv = document.createElement("div");
-        ruleDiv.textContent = `B${i}: ${bRules[i]}`;
-
-        if (isEditingBirthRules) {
-            const increaseButton = document.createElement("button");
-            increaseButton.textContent = "+";
-            increaseButton.addEventListener("click", () => {
-                bRules[i] = (bRules[i] + 1) % 9;
-                updateRulesPanelContent();
-            });
-
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "-";
-            deleteButton.addEventListener("click", () => {
-                bRules.splice(i, 1);
-                updateRulesPanelContent();
-            });
-
-            ruleDiv.appendChild(increaseButton);
-            ruleDiv.appendChild(deleteButton);
-        }
-
-        rulesPanel.appendChild(ruleDiv);
-    }
-
-    if (isEditingBirthRules) {
-        const addRuleButton = document.createElement("button");
-        addRuleButton.textContent = "+ Add Rule";
-        addRuleButton.addEventListener("click", () => {
-            bRules.push(0);
-            updateRulesPanelContent();
-        });
-
-        rulesPanel.appendChild(addRuleButton);
-    }
-}
-
-updateRulesPanelContent();
-
-const rulesButton = document.getElementById("rulesButton");
-rulesButton.addEventListener("click", () => {
-    isEditingSurviveRules = !isEditingSurviveRules;
-    isEditingBirthRules = !isEditingBirthRules;
-    updateRulesPanelContent();
-});
-
-function toggleRulesPanel() {
-    if (rulesPanel.style.display === "none") {
-        rulesPanel.style.display = "block";
-    } else {
-        rulesPanel.style.display = "none";
-    }
-}
-
-rulesButton.addEventListener("click", toggleRulesPanel);
-
+const sRules = [2, 3]; 
+const bRules = [3];
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -296,7 +158,7 @@ function handleMouseDrag(event) {
     const y = Math.floor(mouseY / cellSize);
 
     if (previousMousePos) {
-        drawLine(previousMousePos.x, previousMousePos.y, x, y);
+        drawLine(previousMousePos.x, previousMousePos.y, x, y, event); // Pass event parameter
     }
 
     if (event.buttons === 1) {
@@ -309,7 +171,7 @@ function handleMouseDrag(event) {
     previousMousePos = { x, y };
 }
 
-function drawLine(x1, y1, x2, y2) {
+function drawLine(x1, y1, x2, y2, event) { // Add event parameter here
     const dx = Math.abs(x2 - x1);
     const dy = Math.abs(y2 - y1);
     const sx = (x1 < x2) ? 1 : -1;
@@ -339,6 +201,35 @@ function drawLine(x1, y1, x2, y2) {
             }
         }
     }
+}
+
+const rulesPanel = document.getElementById("rulesPanel");
+const surviveRulesInput = document.getElementById("surviveRulesInput");
+const birthRulesInput = document.getElementById("birthRulesInput");
+
+document.getElementById("rulesButton").addEventListener("click", toggleRulesPanel);
+
+function toggleRulesPanel() {
+    if (rulesPanel.style.display === "none") {
+        rulesPanel.style.display = "block";
+        surviveRulesInput.value = sRules.join(", ");
+        birthRulesInput.value = bRules.join(", ");
+    } else {
+        rulesPanel.style.display = "none";
+    }
+}
+
+surviveRulesInput.addEventListener("input", updateSurviveRules);
+birthRulesInput.addEventListener("input", updateBirthRules);
+
+function updateSurviveRules() {
+    sRules.length = 0;
+    sRules.push(...surviveRulesInput.value.split(",").map(rule => parseInt(rule.trim(), 10)));
+}
+
+function updateBirthRules() {
+    bRules.length = 0;
+    bRules.push(...birthRulesInput.value.split(",").map(rule => parseInt(rule.trim(), 10)));
 }
 
 document.getElementById("startButton").addEventListener("click", startGame);
