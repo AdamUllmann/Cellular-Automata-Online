@@ -266,6 +266,20 @@ speedSlider.addEventListener("input", () => {
     updateSpeed();
 });
 
+document.addEventListener("keydown", (event) => {
+    if (event.code === "Space") {
+        toggleGame();
+    }
+});
+
+function toggleGame() {
+    if (isGameRunning) {
+        stopGame();
+    } else {
+        startGame();
+    }
+}
+
 document.getElementById("startButton").addEventListener("click", startGame);
 document.getElementById("pauseButton").addEventListener("click", stopGame);
 document.getElementById("clearButton").addEventListener("click", clearGrid);
