@@ -3,7 +3,7 @@ body, html {
     padding: 0;
     overflow: hidden;
     background: #1a1a1a;
-    font-family: 'Roboto', monospace;
+    font-family: 'Robot', monospace;
 }
 
 #container {
@@ -37,7 +37,7 @@ button {
     color: white; 
     border-radius: 4px;
     cursor: pointer;
-    font-family: 'Roboto', monospace;
+    font-family: 'Robot', monospace;
 }
 
 button:hover {
