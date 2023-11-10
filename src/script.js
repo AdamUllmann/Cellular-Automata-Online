@@ -128,6 +128,8 @@ function randomizeGrid() {
     drawGrid();
 }
 
+let isMouseDown = false;
+
 canvas.addEventListener("contextmenu", (event) => {
     event.preventDefault();
 });
