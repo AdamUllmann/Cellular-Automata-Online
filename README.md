@@ -2,7 +2,7 @@
 
 An interactive Cellular Automata simulation built using Javascript, CSS, and HTML. Allows the user to experiment with rule combinations in real-time.
 
-Also check out my desktop version written in C++ (it's faster and better): https://github.com/AdamUllmann/Game-of-Life-plus-plus
+Also check out my desktop version written in C++ (it's faster): https://github.com/AdamUllmann/Game-of-Life-plus-plus
 
 ## Features
 
