@@ -1,3 +1,10 @@
+**Controls:**
+
+   - **Draw:** Click and drag on the canvas to draw or erase cells.
+   - **Start/Pause:** Click the "Start" button or use the spacebar to toggle the simulation.
+   - **Clear:** Click the "Clear" button to clear the grid.
+   - **Randomize:** Click the "Randomize" button to set a random initial state.
+
 # [Click Here to Play!](https://adamullmann.github.io/Cellular-Automata-Online/)
 
 An interactive Cellular Automata simulation built using Javascript, CSS, and HTML. Allows the user to experiment with rule combinations in real-time.
@@ -20,13 +27,6 @@ Also check out my desktop version written in C++ (it's faster): https://github.c
    git clone https://github.com/AdamUllmann/Cellular-Automata-Online
    ```
 2. **Open `index.html` in your browser.**
-
-3. **Controls:**
-
-   - **Draw:** Click and drag on the canvas to draw or erase cells.
-   - **Start/Pause:** Click the "Start" button or use the spacebar to toggle the simulation.
-   - **Clear:** Click the "Clear" button to clear the grid.
-   - **Randomize:** Click the "Randomize" button to set a random initial state.
 
 ## Customization
 
