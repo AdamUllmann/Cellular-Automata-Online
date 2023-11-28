@@ -1,15 +1,17 @@
+# [Click Here to Play!](https://adamullmann.github.io/Cellular-Automata-Online/)
+
+![The Site](https://github.com/AdamUllmann/images-for-repos/blob/0ac52bc18bf562f6e6b248ca963afa1019f61ae5/cellularautomataonline.png)
+
+An interactive Cellular Automata simulation built using Javascript, CSS, and HTML. Allows the user to experiment with rule combinations in real-time.
+
+Also check out my desktop version written in C++ (it's faster): https://github.com/AdamUllmann/Game-of-Life-plus-plus
+
 **Controls:**
 
    - **Draw:** Click and drag on the canvas to draw or erase cells.
    - **Start/Pause:** Click the "Start" button or use the spacebar to toggle the simulation.
    - **Clear:** Click the "Clear" button to clear the grid.
    - **Randomize:** Click the "Randomize" button to set a random initial state.
-
-# [Click Here to Play!](https://adamullmann.github.io/Cellular-Automata-Online/)
-
-An interactive Cellular Automata simulation built using Javascript, CSS, and HTML. Allows the user to experiment with rule combinations in real-time.
-
-Also check out my desktop version written in C++ (it's faster): https://github.com/AdamUllmann/Game-of-Life-plus-plus
 
 ## Features
 
