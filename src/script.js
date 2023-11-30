@@ -202,7 +202,7 @@ function handleMouseDrag(event) {
 
     
 
-    const isDrawing = event.type === 'touchstart' && event.touches.length > 0;
+    const isDrawing = event.type === ('touchstart' || 'touchmove') && event.touches.length > 0;
 
     if (isDrawing) {
         grid[x][y] = !grid[x][y];
