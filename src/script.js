@@ -129,6 +129,7 @@ function randomizeGrid() {
 }
 
 let isMouseDown = false;
+let isTouchActive = false;
 
 canvas.addEventListener("contextmenu", (event) => {
     event.preventDefault();
@@ -151,18 +152,18 @@ canvas.addEventListener("mouseup", () => {
 });
 
 canvas.addEventListener("touchmove", (event) => {
-    if (isMouseDown) {
+    if (isTouchActive) {
         handleMouseDrag(event);
     }
 });
 
 canvas.addEventListener("touchstart", (event) => {
-    isMouseDown = true;
+    isTouchActive = true;
     handleMouseDrag(event);
 });
 
 canvas.addEventListener("touchend", () => {
-    isMouseDown = false;
+    isTouchActive = false;
     previousMousePos = null;
 });
 
@@ -172,6 +173,8 @@ let previousMousePos = null;
 function handleMouseDrag(event) {
     event.preventDefault();
 
+    let mouseX, mouseY;
+
     if (event.type.startsWith('touch')) {
         if (event.touches.length === 0) return;
         mouseX = event.touches[0].clientX;
@@ -180,29 +183,21 @@ function handleMouseDrag(event) {
         mouseX = event.clientX;
         mouseY = event.clientY;
     }
+
     const x = Math.floor(mouseX / cellSize);
     const y = Math.floor(mouseY / cellSize);
-
-    if (previousMousePos) {
-        drawLine(previousMousePos.x, previousMousePos.y, x, y, event); 
-    }
-
-    if (event.buttons === 1) {
-        grid[x][y] = true;
-    } else if (event.buttons === 2) {
-        grid[x][y] = false;
-    }
 
     if (x < 0 || y < 0 || x >= gridWidth || y >= gridHeight) {
         return;
     }
 
-    const isDrawing = event.type === 'touchstart' && event.touches.length > 0;
-
-    if (isDrawing) {
-        grid[x][y] = !grid[x][y];
+    if (previousMousePos) {
+        drawLine(previousMousePos.x, previousMousePos.y, x, y, event); 
+    } else {
+        if (event.type.startsWith('touch')) {
+            grid[x][y] = !grid[x][y];
+        }
     }
-
 
     drawGrid();
     previousMousePos = { x, y };
