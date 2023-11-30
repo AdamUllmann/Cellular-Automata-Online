@@ -135,6 +135,7 @@ canvas.addEventListener("contextmenu", (event) => {
     event.preventDefault();
 });
 
+// Mouse event listeners
 canvas.addEventListener("mousemove", (event) => {
     if (isMouseDown) {
         handleMouseDrag(event);
@@ -151,10 +152,9 @@ canvas.addEventListener("mouseup", () => {
     previousMousePos = null;
 });
 
+// Touch event listeners
 canvas.addEventListener("touchmove", (event) => {
-    //if (isTouchActive) {
-        handleMouseDrag(event);
-    //}
+    handleMouseDrag(event);
 });
 
 canvas.addEventListener("touchstart", (event) => {
@@ -167,47 +167,47 @@ canvas.addEventListener("touchend", () => {
     previousMousePos = null;
 });
 
-
 let previousMousePos = null;
 
 function handleMouseDrag(event) {
     event.preventDefault();
 
-    let mousX, mouseY
+    let mouseX, mouseY;
 
+    // Handle touch events
     if (event.type.startsWith('touch')) {
         if (event.touches.length === 0) return;
         mouseX = event.touches[0].clientX;
         mouseY = event.touches[0].clientY;
     } else {
+        // Handle mouse events
         mouseX = event.clientX;
         mouseY = event.clientY;
     }
+
     const x = Math.floor(mouseX / cellSize);
     const y = Math.floor(mouseY / cellSize);
-
-    if (previousMousePos) {
-        drawLine(previousMousePos.x, previousMousePos.y, x, y, event); 
-    }
 
     if (x < 0 || y < 0 || x >= gridWidth || y >= gridHeight) {
         return;
     }
 
+    // Draw line for mouse drag
     if (previousMousePos && !event.type.startsWith('touch')) {
         drawLine(previousMousePos.x, previousMousePos.y, x, y, event);
     }
 
+    // Toggle grid cell for touch events
     if (event.type.startsWith('touch')) {
         grid[x][y] = !grid[x][y];
     } else {
+        // Set grid cell based on mouse buttons for mouse events
         if (event.buttons === 1) {
             grid[x][y] = true;
         } else if (event.buttons === 2) {
             grid[x][y] = false;
         }
     }
-
 
     drawGrid();
     previousMousePos = { x, y };
