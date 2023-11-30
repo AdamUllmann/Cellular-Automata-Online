@@ -173,14 +173,12 @@ input[type="text"] {
     margin-top: 1px;
     box-sizing: border-box;
     font-size: 1.3em;
-    width: 26%
 }
 
 input[type="text"]:focus {
     border: 1px solid #4CAF50;
     outline: none;
     font-size: 1.3em;
-    width: 26%
 }
 
 #surviveRulesInput,
@@ -189,14 +187,13 @@ input[type="text"]:focus {
     color: #fff;
     border: 1px solid #4CAF50;
     font-size: 1.3em;
-    width: 26%
+    width: 90%
 }
 
 #surviveRulesInput::placeholder,
 #birthRulesInput::placeholder {
     color: #aaa;
     font-size: 1.3em;
-    width: 26%
 }
 
 #surviveRulesInput:focus,
@@ -204,7 +201,6 @@ input[type="text"]:focus {
     border: 1px solid #4CAF50; 
     outline: none;
     font-size: 1.3em;
-    width: 26%
 }
 
 }
