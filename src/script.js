@@ -150,18 +150,37 @@ canvas.addEventListener("mouseup", () => {
     previousMousePos = null;
 });
 
+canvas.addEventListener("touchmove", (event) => {
+    if (isMouseDown) {
+        handleMouseDrag(event);
+    }
+});
+
+canvas.addEventListener("touchstart", (event) => {
+    isMouseDown = true;
+    handleMouseDrag(event);
+});
+
+canvas.addEventListener("touchend", () => {
+    isMouseDown = false;
+    previousMousePos = null;
+});
+
+
 let previousMousePos = null;
 
 function handleMouseDrag(event) {
     event.preventDefault();
 
-    const rect = canvas.getBoundingClientRect();
-    //if (event.type.startsWith('touch')) {
-    //    mouseX = event.touches[0].clientX;
-    //    mouseY = event.touches[0].clientY;
-    //}
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
+    if (event.type.startsWith('touch')) {
+        // Handle touch events
+        mouseX = event.touches[0].clientX;
+        mouseY = event.touches[0].clientY;
+    } else {
+        // Handle mouse events
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    }
     const x = Math.floor(mouseX / cellSize);
     const y = Math.floor(mouseY / cellSize);
 
