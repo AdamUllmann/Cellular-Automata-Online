@@ -147,6 +147,7 @@ label[for="speedSlider"] {
         box-shadow: 0 0 16px rgba(76, 175, 80, 0.3); 
         color: #fff; 
         font-size: 1.3em;
+        width: 80%;
     }
     
     #rulesPanel h2 {
