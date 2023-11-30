@@ -244,14 +244,10 @@ function drawLine(x1, y1, x2, y2, event) {
         }
 
         if (previousMousePos) {
-            if (event.type.startsWith('touch')) {
-                grid[x][y] = !initialTouchState;
-            } else {
-                if (event.buttons === 1) {
-                    grid[x][y] = true;
-                } else if (event.buttons === 2) {
-                    grid[x][y] = false;
-                }
+            if (event.buttons === 1) {
+                grid[x1][y1] = true;
+            } else if (event.buttons === 2) {
+                grid[x1][y1] = false;
             }
         }
     }
