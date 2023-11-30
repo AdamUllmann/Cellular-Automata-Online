@@ -146,7 +146,7 @@ label[for="speedSlider"] {
         background: #333; 
         box-shadow: 0 0 16px rgba(76, 175, 80, 0.3); 
         color: #fff; 
-        font-size: 1.3em;
+        font-size: 1.2em;
         width: 30%;
     }
     
@@ -156,14 +156,14 @@ label[for="speedSlider"] {
         border-bottom: 1px solid #4CAF50; 
         padding-bottom: 6px; 
         margin-top: 1px;
-        font-size: 1.3em;
+        font-size: 1.2em;
         width: 35%;
     }
 
     #surviveRules,
 #birthRules {
     margin-top: 10px; 
-    font-size: 1.3em;
+    font-size: 1.2em;
     width: 90%;
 }
 
@@ -172,13 +172,13 @@ input[type="text"] {
     padding: 6px; 
     margin-top: 1px;
     box-sizing: border-box;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 input[type="text"]:focus {
     border: 1px solid #4CAF50;
     outline: none;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 #surviveRulesInput,
@@ -186,20 +186,20 @@ input[type="text"]:focus {
     background: #444;
     color: #fff;
     border: 1px solid #4CAF50;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 #surviveRulesInput::placeholder,
 #birthRulesInput::placeholder {
     color: #aaa;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 #surviveRulesInput:focus,
 #birthRulesInput:focus {
     border: 1px solid #4CAF50; 
     outline: none;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 }
