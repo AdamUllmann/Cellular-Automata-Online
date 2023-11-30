@@ -170,7 +170,7 @@ canvas.addEventListener("touchend", () => {
 let previousMousePos = null;
 
 function handleMouseDrag(event) {
-    //event.preventDefault();
+    event.preventDefault();
 
     if (event.type.startsWith('touch')) {
         mouseX = event.touches.clientX;
