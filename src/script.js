@@ -153,7 +153,13 @@ canvas.addEventListener("mouseup", () => {
 let previousMousePos = null;
 
 function handleMouseDrag(event) {
+    event.preventDefault();
+
     const rect = canvas.getBoundingClientRect();
+    //if (event.type.startsWith('touch')) {
+    //    mouseX = event.touches[0].clientX;
+    //    mouseY = event.touches[0].clientY;
+    //}
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
     const x = Math.floor(mouseX / cellSize);
