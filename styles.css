@@ -157,14 +157,14 @@ label[for="speedSlider"] {
         padding-bottom: 6px; 
         margin-top: 1px;
         font-size: 1.3em;
-        width: 30%;
+        width: 35%;
     }
 
     #surviveRules,
 #birthRules {
     margin-top: 10px; 
     font-size: 1.3em;
-    width: 26%;
+    width: 90%;
 }
 
 input[type="text"] {
@@ -187,7 +187,6 @@ input[type="text"]:focus {
     color: #fff;
     border: 1px solid #4CAF50;
     font-size: 1.3em;
-    width: 90%
 }
 
 #surviveRulesInput::placeholder,
