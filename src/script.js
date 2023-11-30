@@ -173,7 +173,7 @@ let previousMousePos = null;
 function handleMouseDrag(event) {
     event.preventDefault();
 
-    let mouseX, mouseY;
+    let mousX, mouseY
 
     if (event.type.startsWith('touch')) {
         if (event.touches.length === 0) return;
@@ -183,21 +183,31 @@ function handleMouseDrag(event) {
         mouseX = event.clientX;
         mouseY = event.clientY;
     }
-
     const x = Math.floor(mouseX / cellSize);
     const y = Math.floor(mouseY / cellSize);
+
+    if (previousMousePos) {
+        drawLine(previousMousePos.x, previousMousePos.y, x, y, event); 
+    }
 
     if (x < 0 || y < 0 || x >= gridWidth || y >= gridHeight) {
         return;
     }
 
-    if (previousMousePos) {
-        drawLine(previousMousePos.x, previousMousePos.y, x, y, event); 
-    } else {
-        if (event.type.startsWith('touch')) {
-            grid[x][y] = !grid[x][y];
-        }
+    if (event.buttons === 1) {
+        grid[x][y] = true;
+    } else if (event.buttons === 2) {
+        grid[x][y] = false;
     }
+
+    
+
+    const isDrawing = event.type === 'touchstart' && event.touches.length > 0;
+
+    if (isDrawing) {
+        grid[x][y] = !grid[x][y];
+    }
+
 
     drawGrid();
     previousMousePos = { x, y };
