@@ -173,8 +173,9 @@ function handleMouseDrag(event) {
     event.preventDefault();
 
     if (event.type.startsWith('touch')) {
-        mouseX = event.touches.clientX;
-        mouseY = event.touches.clientY;
+        if (event.touches.length === 0) return;
+        mouseX = event.touches[0].clientX;
+        mouseY = event.touches[0].clientY;
     } else {
         mouseX = event.clientX;
         mouseY = event.clientY;
@@ -183,7 +184,7 @@ function handleMouseDrag(event) {
     const y = Math.floor(mouseY / cellSize);
 
     if (previousMousePos) {
-        drawLine(previousMousePos.x, previousMousePos.y, x, y, event); // Pass event parameter
+        drawLine(previousMousePos.x, previousMousePos.y, x, y, event); 
     }
 
     if (event.buttons === 1) {
@@ -192,11 +193,22 @@ function handleMouseDrag(event) {
         grid[x][y] = false;
     }
 
+    if (x < 0 || y < 0 || x >= gridWidth || y >= gridHeight) {
+        return;
+    }
+
+    const isDrawing = event.type === 'touchstart' && event.touches.length > 0;
+
+    if (isDrawing) {
+        grid[x][y] = !grid[x][y];
+    }
+
+
     drawGrid();
     previousMousePos = { x, y };
 }
 
-function drawLine(x1, y1, x2, y2, event) { // Add event parameter here
+function drawLine(x1, y1, x2, y2, event) { 
     const dx = Math.abs(x2 - x1);
     const dy = Math.abs(y2 - y1);
     const sx = (x1 < x2) ? 1 : -1;
