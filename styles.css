@@ -6,6 +6,14 @@ body, html {
     font-family: 'Robot', monospace;
 }
 
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none; 
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
 #container {
     display: flex;
     position: absolute;
