@@ -130,6 +130,7 @@ function randomizeGrid() {
 
 let isMouseDown = false;
 let isTouchActive = false;
+let initialTouchState = false;
 
 canvas.addEventListener("contextmenu", (event) => {
     event.preventDefault();
@@ -169,6 +170,17 @@ canvas.addEventListener("touchend", () => {
 
 let previousMousePos = null;
 
+function setInitialTouchState(event) {
+    const touchX = event.touches[0].clientX;
+    const touchY = event.touches[0].clientY;
+    const x = Math.floor(touchX / cellSize);
+    const y = Math.floor(touchY / cellSize);
+
+    if (x >= 0 && y >= 0 && x < gridWidth && y < gridHeight) {
+        initialTouchState = grid[x][y];
+    }
+}
+
 function handleMouseDrag(event) {
     event.preventDefault();
 
@@ -195,7 +207,7 @@ function handleMouseDrag(event) {
     }
 
     if (event.type.startsWith('touch')) {
-        grid[x][y] = !grid[x][y];
+        grid[x][y] = !initialTouchState;
     } else {
         if (event.buttons === 1) {
             grid[x][y] = true;
