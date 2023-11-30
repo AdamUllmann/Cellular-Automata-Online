@@ -165,7 +165,7 @@ label[for="speedSlider"] {
 }
 
 input[type="text"] {
-    width: 100%;
+    width: 80%;
     padding: 6px; 
     margin-top: 1px;
     box-sizing: border-box;
