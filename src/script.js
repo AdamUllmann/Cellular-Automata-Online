@@ -152,9 +152,9 @@ canvas.addEventListener("mouseup", () => {
 });
 
 canvas.addEventListener("touchmove", (event) => {
-    if (isTouchActive) {
+    //if (isTouchActive) {
         handleMouseDrag(event);
-    }
+    //}
 });
 
 canvas.addEventListener("touchstart", (event) => {
@@ -194,18 +194,18 @@ function handleMouseDrag(event) {
         return;
     }
 
-    if (event.buttons === 1) {
-        grid[x][y] = true;
-    } else if (event.buttons === 2) {
-        grid[x][y] = false;
+    if (previousMousePos && !event.type.startsWith('touch')) {
+        drawLine(previousMousePos.x, previousMousePos.y, x, y, event);
     }
 
-    
-
-    const isDrawing = event.type === 'touchstart' || event.type === 'touchmove';
-
-    if (isDrawing) {
+    if (event.type.startsWith('touch')) {
         grid[x][y] = !grid[x][y];
+    } else {
+        if (event.buttons === 1) {
+            grid[x][y] = true;
+        } else if (event.buttons === 2) {
+            grid[x][y] = false;
+        }
     }
 
 
