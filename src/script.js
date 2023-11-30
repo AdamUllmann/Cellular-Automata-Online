@@ -182,6 +182,17 @@ function setInitialTouchState(event) {
     }
 }
 
+function setInitialTouchState(event) {
+    const touchX = event.touches[0].clientX;
+    const touchY = event.touches[0].clientY;
+    const x = Math.floor(touchX / cellSize);
+    const y = Math.floor(touchY / cellSize);
+
+    if (x >= 0 && y >= 0 && x < gridWidth && y < gridHeight) {
+        initialTouchState = grid[x][y];
+    }
+}
+
 function handleMouseDrag(event) {
     event.preventDefault();
 
@@ -203,25 +214,15 @@ function handleMouseDrag(event) {
         return;
     }
 
-    if (previousMousePos /*&& !event.type.startsWith('touch')*/) {
-        drawLine(previousMousePos.x, previousMousePos.y, x, y, event);
-    }
-
-    if (event.type.startsWith('touch')) {
-        grid[x][y] = !initialTouchState;
-    } else {
-        if (event.buttons === 1) {
-            grid[x][y] = true;
-        } else if (event.buttons === 2) {
-            grid[x][y] = false;
-        }
+    if (previousMousePos) {
+        drawLine(previousMousePos.x, previousMousePos.y, x, y, event.type.startsWith('touch'));
     }
 
     drawGrid();
     previousMousePos = { x, y };
 }
 
-function drawLine(x1, y1, x2, y2, event) { 
+function drawLine(x1, y1, x2, y2, isTouch) { 
     const dx = Math.abs(x2 - x1);
     const dy = Math.abs(y2 - y1);
     const sx = (x1 < x2) ? 1 : -1;
@@ -243,7 +244,11 @@ function drawLine(x1, y1, x2, y2, event) {
             y1 += sy;
         }
 
-        if (previousMousePos) {
+        // Set cells based on the initial touch state for touch events
+        if (isTouch) {
+            grid[x1][y1] = !initialTouchState;
+        } else {
+            // Mouse event handling (remains unchanged)
             if (event.buttons === 1) {
                 grid[x1][y1] = true;
             } else if (event.buttons === 2) {
