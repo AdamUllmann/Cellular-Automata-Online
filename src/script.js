@@ -174,13 +174,11 @@ function handleMouseDrag(event) {
 
     let mouseX, mouseY;
 
-    // Handle touch events
     if (event.type.startsWith('touch')) {
         if (event.touches.length === 0) return;
         mouseX = event.touches[0].clientX;
         mouseY = event.touches[0].clientY;
     } else {
-        // Handle mouse events
         mouseX = event.clientX;
         mouseY = event.clientY;
     }
@@ -192,16 +190,13 @@ function handleMouseDrag(event) {
         return;
     }
 
-    // Draw line for mouse drag
-    if (previousMousePos && !event.type.startsWith('touch')) {
+    if (previousMousePos /*&& !event.type.startsWith('touch')*/) {
         drawLine(previousMousePos.x, previousMousePos.y, x, y, event);
     }
 
-    // Toggle grid cell for touch events
     if (event.type.startsWith('touch')) {
         grid[x][y] = !grid[x][y];
     } else {
-        // Set grid cell based on mouse buttons for mouse events
         if (event.buttons === 1) {
             grid[x][y] = true;
         } else if (event.buttons === 2) {
