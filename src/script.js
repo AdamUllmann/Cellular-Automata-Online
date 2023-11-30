@@ -160,6 +160,7 @@ canvas.addEventListener("touchmove", (event) => {
 
 canvas.addEventListener("touchstart", (event) => {
     isTouchActive = true;
+    setInitialTouchState(event);
     handleMouseDrag(event);
 });
 
@@ -243,10 +244,14 @@ function drawLine(x1, y1, x2, y2, event) {
         }
 
         if (previousMousePos) {
-            if (event.buttons === 1) {
-                grid[x1][y1] = true;
-            } else if (event.buttons === 2) {
-                grid[x1][y1] = false;
+            if (event.type.startsWith('touch')) {
+                grid[x][y] = !initialTouchState;
+            } else {
+                if (event.buttons === 1) {
+                    grid[x][y] = true;
+                } else if (event.buttons === 2) {
+                    grid[x][y] = false;
+                }
             }
         }
     }
